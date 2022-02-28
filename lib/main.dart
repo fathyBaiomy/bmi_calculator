@@ -37,6 +37,17 @@ class MyApp extends StatelessWidget {
                 color: Colors.blue,
               ),
             ),
+            Container(
+              color: Colors.red,
+              width: double.infinity,
+              child: MaterialButton(
+                onPressed: () {},
+                child: Text(
+                  'calculate',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            )
           ],
         ),
       ),
