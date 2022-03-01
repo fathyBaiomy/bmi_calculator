@@ -1,8 +1,15 @@
+import 'dart:math';
+
 import 'package:bmi_calculator_app/BMIResult.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(BMIResult());
+  runApp(MaterialApp(
+    title: 'Flutter Demo',
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(),
+    home: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -14,121 +21,128 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isMale = true;
-  double value = 100, weight = 70, height = 180;
+  double weight = 70, height = 100, age = 20;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('BMI calculator'),
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        child: BoxContainer(
-                            color: isMale ? Colors.blue : Colors.grey,
-                            child: MaleFemaleWidget(
-                                text: 'male',
-                                path: "assets/images/male.png",
-                                color: Colors.black)),
-                        onTap: () {
-                          setState(() {
-                            isMale = true;
-                          });
-                        },
-                      ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('BMI calculator'),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      child: BoxContainer(
+                          color: isMale ? Colors.blue : Colors.grey,
+                          child: MaleFemaleWidget(
+                              text: 'male',
+                              path: "assets/images/male.png",
+                              color: Colors.black)),
+                      onTap: () {
+                        setState(() {
+                          isMale = true;
+                        });
+                      },
                     ),
-                    SizedBox(width: 20),
-                    Expanded(
-                      child: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isMale = false;
-                          });
-                        },
-                        child: BoxContainer(
-                            color: !isMale ? Colors.blue : Colors.grey,
-                            child: MaleFemaleWidget(
-                                text: 'female',
-                                path: "assets/images/female.png",
-                                color: Colors.black)),
-                      ),
+                  ),
+                  SizedBox(width: 20),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          isMale = false;
+                        });
+                      },
+                      child: BoxContainer(
+                          color: !isMale ? Colors.blue : Colors.grey,
+                          child: MaleFemaleWidget(
+                              text: 'female',
+                              path: "assets/images/female.png",
+                              color: Colors.black)),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: BoxContainer(
-                    child: SliderWidget(
-                  value: value,
-                  onChanged: (value) {
-                    setState(() {
-                      this.value = value;
-                    });
-                  },
-                )),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: BoxContainer(
+                  child: SliderWidget(
+                value: height,
+                onChanged: (value) {
+                  setState(() {
+                    this.height = value;
+                  });
+                },
+              )),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                      child: BoxContainer(
+                          child: valueWidget(
+                              title: 'weight',
+                              value: weight,
+                              onChange: (value) {
+                                setState(() {
+                                  weight = value;
+                                });
+                              }))),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                      child: BoxContainer(
+                          child: valueWidget(
+                              title: 'age',
+                              value: age,
+                              onChange: (value) {
+                                setState(() {
+                                  age = value;
+                                });
+                              }))),
+                ],
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                        child: BoxContainer(
-                            child: valueWidget(
-                                title: 'weight',
-                                value: weight,
-                                onChange: (value) {
-                                  setState(() {
-                                    weight = value;
-                                  });
-                                }))),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                        child: BoxContainer(
-                            child: valueWidget(
-                                title: 'height',
-                                value: height,
-                                onChange: (value) {
-                                  setState(() {
-                                    height = value;
-                                  });
-                                }))),
-                  ],
-                ),
+          ),
+          Container(
+            color: Colors.blue,
+            width: double.infinity,
+            child: MaterialButton(
+              height: 60,
+              onPressed: () {
+                double result = weight.round() / pow(height.round() / 100, 2);
+                print('weight = ${weight} , height=${height.round()}');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (theContext) => MaterialApp(
+                          home: BMIResult.init(
+                              gender: isMale ? 'male' : 'female',
+                              result: result.round(),
+                              age: age.round())),
+                    ));
+              },
+              child: Text(
+                'calculate',
+                style: TextStyle(color: Colors.white, fontSize: 25),
               ),
             ),
-            Container(
-              color: Colors.blue,
-              width: double.infinity,
-              child: MaterialButton(
-                height: 60,
-                onPressed: () {},
-                child: Text(
-                  'calculate',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
@@ -158,12 +172,11 @@ Widget MaleFemaleWidget(
   );
 }
 
-Widget SliderWidget({
-  double value = 120,
-  double minValue = 80,
-  double maxValue = 220,
-  required void onChanged(double value),
-}) {
+Widget SliderWidget(
+    {double value = 120,
+    double minValue = 80,
+    double maxValue = 220,
+    required void onChanged(double value)}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
@@ -208,6 +221,7 @@ Widget valueWidget({
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           FloatingActionButton(
+            heroTag: 'minus+${title}',
             mini: true,
             onPressed: () {
               if (value > minValue) value--;
@@ -216,6 +230,7 @@ Widget valueWidget({
             child: Icon(Icons.remove),
           ),
           FloatingActionButton(
+            heroTag: 'plus+${title}',
             mini: true,
             onPressed: () {
               if (value < maxValue) ++value;
