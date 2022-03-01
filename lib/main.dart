@@ -12,6 +12,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool isMale = true;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -31,19 +32,35 @@ class _MyAppState extends State<MyApp> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: BoxContainer(
-                          child: MaleFemaleWidget(
-                              text: 'male',
-                              path: "assets/images/male.png",
-                              color: Colors.black)),
+                      child: InkWell(
+                        child: BoxContainer(
+                            color: isMale ? Colors.blue : Colors.grey,
+                            child: MaleFemaleWidget(
+                                text: 'male',
+                                path: "assets/images/male.png",
+                                color: Colors.black)),
+                        onTap: () {
+                          setState(() {
+                            isMale = true;
+                          });
+                        },
+                      ),
                     ),
                     SizedBox(width: 20),
                     Expanded(
-                      child: BoxContainer(
-                          child: MaleFemaleWidget(
-                              text: 'female',
-                              path: "assets/images/female.png",
-                              color: Colors.black)),
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            isMale = false;
+                          });
+                        },
+                        child: BoxContainer(
+                            color: !isMale ? Colors.blue : Colors.grey,
+                            child: MaleFemaleWidget(
+                                text: 'female',
+                                path: "assets/images/female.png",
+                                color: Colors.black)),
+                      ),
                     ),
                   ],
                 ),
@@ -117,7 +134,8 @@ Widget MaleFemaleWidget(
   );
 }
 
-Widget SliderWidget() {
+Widget SliderWidget(
+    {double value = 120, double minValue = 80, double maxValue = 220}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
@@ -128,9 +146,9 @@ Widget SliderWidget() {
           )),
       heightText(value: '180', type: 'cm'),
       Slider(
-        value: 100,
-        max: 220,
-        min: 20,
+        value: value,
+        max: maxValue,
+        min: minValue,
         onChanged: (value) {
           print(value.round());
         },
