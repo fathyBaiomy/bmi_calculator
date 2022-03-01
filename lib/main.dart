@@ -46,12 +46,22 @@ class MyApp extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  BoxContainer(child: valueWidget(title: 'weight')),
-                  BoxContainer(child: valueWidget(title: 'height')),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        child: BoxContainer(
+                            child: valueWidget(title: 'weight', value: '70'))),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                        child: BoxContainer(
+                            child: valueWidget(title: 'height', value: '180'))),
+                  ],
+                ),
               ),
             ),
             Container(
