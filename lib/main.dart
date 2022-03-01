@@ -78,3 +78,7 @@ Widget MaleFemaleWidget({required String text, required IconData icon}) {
     ],
   );
 }
+
+Widget BoxContainer(Widget child) => Container(
+      child: child,
+    );
