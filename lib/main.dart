@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -42,9 +40,9 @@ class MyApp extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Container(
-                width: double.infinity,
-                color: Colors.red,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: BoxContainer(child: SliderWidget()),
               ),
             ),
             Expanded(
@@ -93,11 +91,58 @@ Widget MaleFemaleWidget({required String text, required IconData icon}) {
   );
 }
 
-Widget BoxContainer({required Widget child, Color color = Colors.grey}) =>
-    Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: color,
+Widget SliderWidget() {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Text("Height",
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          )),
+      heightText(value: '180', type: 'cm'),
+      Slider(
+        value: 100,
+        max: 220,
+        min: 20,
+        onChanged: (value) {
+          print(value.round());
+        },
+      )
+    ],
+  );
+}
+
+Widget heightText({required String value, required String type}) {
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.baseline,
+    // mainAxisSize: MainAxisSize.m,
+    mainAxisAlignment: MainAxisAlignment.center,
+    textBaseline: TextBaseline.alphabetic,
+    children: [
+      Text(value,
+          style: TextStyle(
+            fontSize: 40,
+            fontWeight: FontWeight.w900,
+          )),
+      SizedBox(
+        width: 5,
       ),
-      child: child,
-    );
+      Text(type,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          )),
+    ],
+  );
+}
+
+Widget BoxContainer({required Widget child, Color color = Colors.grey}) {
+  return Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      color: color,
+    ),
+    child: child,
+  );
+}
