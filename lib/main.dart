@@ -59,6 +59,22 @@ class MyApp extends StatelessWidget {
 
 Widget MaleFemaleWidget({required String text, required IconData icon}) {
   return Column(
-    children: [Text(text), Icon(icon)],
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Text(
+        text,
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      SizedBox(
+        height: 15,
+      ),
+      Icon(
+        icon,
+        size: 70,
+      )
+    ],
   );
 }
