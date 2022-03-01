@@ -46,9 +46,12 @@ class MyApp extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Container(
-                width: double.infinity,
-                color: Colors.blue,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  BoxContainer(child: valueWidget(title: 'weight')),
+                  BoxContainer(child: valueWidget(title: 'height')),
+                ],
               ),
             ),
             Container(
@@ -108,6 +111,38 @@ Widget SliderWidget() {
         onChanged: (value) {
           print(value.round());
         },
+      )
+    ],
+  );
+}
+
+Widget valueWidget({required String title, String value = "20"}) {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Text(
+        title,
+        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+      ),
+      Text(
+        value,
+        style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FloatingActionButton(
+            mini: true,
+            onPressed: () {},
+            child: Icon(Icons.remove),
+          ),
+          FloatingActionButton(
+            mini: true,
+            onPressed: () {},
+            child: Icon(Icons.add),
+          ),
+        ],
       )
     ],
   );
