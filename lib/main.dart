@@ -12,6 +12,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool isMale = true;
+  double value = 100;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -31,19 +33,35 @@ class _MyAppState extends State<MyApp> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: BoxContainer(
-                          child: MaleFemaleWidget(
-                              text: 'male',
-                              path: "assets/images/male.png",
-                              color: Colors.black)),
+                      child: InkWell(
+                        child: BoxContainer(
+                            color: isMale ? Colors.blue : Colors.grey,
+                            child: MaleFemaleWidget(
+                                text: 'male',
+                                path: "assets/images/male.png",
+                                color: Colors.black)),
+                        onTap: () {
+                          setState(() {
+                            isMale = true;
+                          });
+                        },
+                      ),
                     ),
                     SizedBox(width: 20),
                     Expanded(
-                      child: BoxContainer(
-                          child: MaleFemaleWidget(
-                              text: 'female',
-                              path: "assets/images/female.png",
-                              color: Colors.black)),
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            isMale = false;
+                          });
+                        },
+                        child: BoxContainer(
+                            color: !isMale ? Colors.blue : Colors.grey,
+                            child: MaleFemaleWidget(
+                                text: 'female',
+                                path: "assets/images/female.png",
+                                color: Colors.black)),
+                      ),
                     ),
                   ],
                 ),
@@ -52,7 +70,15 @@ class _MyAppState extends State<MyApp> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: BoxContainer(child: SliderWidget()),
+                child: BoxContainer(
+                    child: SliderWidget(
+                  value: value,
+                  onChanged: (value) {
+                    setState(() {
+                      this.value = value;
+                    });
+                  },
+                )),
               ),
             ),
             Expanded(
@@ -117,7 +143,12 @@ Widget MaleFemaleWidget(
   );
 }
 
-Widget SliderWidget() {
+Widget SliderWidget({
+  double value = 120,
+  double minValue = 80,
+  double maxValue = 220,
+  required void onChanged(double value),
+}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
@@ -126,13 +157,13 @@ Widget SliderWidget() {
             fontSize: 30,
             fontWeight: FontWeight.bold,
           )),
-      heightText(value: '180', type: 'cm'),
+      heightText(value: '${value.round()}', type: 'cm'),
       Slider(
-        value: 100,
-        max: 220,
-        min: 20,
+        value: value,
+        max: maxValue,
+        min: minValue,
         onChanged: (value) {
-          print(value.round());
+          onChanged(value);
         },
       )
     ],
