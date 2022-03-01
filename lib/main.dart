@@ -20,9 +20,11 @@ class MyApp extends StatelessWidget {
         body: Column(
           children: [
             Expanded(
-              child: Container(
-                width: double.infinity,
-                color: Colors.green,
+              child: Row(
+                children: [
+                  MaleFemaleWidget(text: 'male', icon: Icons.male),
+                  MaleFemaleWidget(text: 'female', icon: Icons.female),
+                ],
               ),
             ),
             Expanded(
@@ -53,4 +55,10 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget MaleFemaleWidget({required String text, required IconData icon}) {
+  return Column(
+    children: [Text(text), Icon(icon)],
+  );
 }
