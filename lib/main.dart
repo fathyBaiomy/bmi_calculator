@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
                       child: BoxContainer(
                           child: MaleFemaleWidget(
                               text: 'male',
-                              path: "images/male.png",
+                              path: "assets/images/male.png",
                               color: Colors.black)),
                     ),
                     SizedBox(width: 20),
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
                       child: BoxContainer(
                           child: MaleFemaleWidget(
                               text: 'female',
-                              path: "images/female.png",
+                              path: "assets/images/female.png",
                               color: Colors.black)),
                     ),
                   ],
