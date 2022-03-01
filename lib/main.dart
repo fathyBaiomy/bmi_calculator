@@ -46,19 +46,33 @@ class MyApp extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Container(
-                width: double.infinity,
-                color: Colors.blue,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        child: BoxContainer(
+                            child: valueWidget(title: 'weight', value: '70'))),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                        child: BoxContainer(
+                            child: valueWidget(title: 'height', value: '180'))),
+                  ],
+                ),
               ),
             ),
             Container(
-              color: Colors.red,
+              color: Colors.blue,
               width: double.infinity,
               child: MaterialButton(
+                height: 60,
                 onPressed: () {},
                 child: Text(
                   'calculate',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ),
             )
@@ -108,6 +122,38 @@ Widget SliderWidget() {
         onChanged: (value) {
           print(value.round());
         },
+      )
+    ],
+  );
+}
+
+Widget valueWidget({required String title, String value = "20"}) {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Text(
+        title,
+        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+      ),
+      Text(
+        value,
+        style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FloatingActionButton(
+            mini: true,
+            onPressed: () {},
+            child: Icon(Icons.remove),
+          ),
+          FloatingActionButton(
+            mini: true,
+            onPressed: () {},
+            child: Icon(Icons.add),
+          ),
+        ],
       )
     ],
   );
