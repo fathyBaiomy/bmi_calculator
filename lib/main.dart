@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -92,12 +90,34 @@ Widget MaleFemaleWidget({required String text, required IconData icon}) {
 
 Widget SliderWidget() {
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       Text("Height",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 30,
             fontWeight: FontWeight.bold,
           )),
+      Row(
+        crossAxisAlignment: CrossAxisAlignment.baseline,
+        // mainAxisSize: MainAxisSize.m,
+        mainAxisAlignment: MainAxisAlignment.center,
+        textBaseline: TextBaseline.alphabetic,
+        children: [
+          Text("180",
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.w900,
+              )),
+          SizedBox(
+            width: 5,
+          ),
+          Text("cm",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              )),
+        ],
+      ),
     ],
   );
 }
