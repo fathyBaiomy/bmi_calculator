@@ -13,6 +13,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isMale = true;
+  double value = 100;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,15 @@ class _MyAppState extends State<MyApp> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: BoxContainer(child: SliderWidget()),
+                child: BoxContainer(
+                    child: SliderWidget(
+                  value: value,
+                  onChanged: (value) {
+                    setState(() {
+                      this.value = value;
+                    });
+                  },
+                )),
               ),
             ),
             Expanded(
@@ -134,8 +143,12 @@ Widget MaleFemaleWidget(
   );
 }
 
-Widget SliderWidget(
-    {double value = 120, double minValue = 80, double maxValue = 220}) {
+Widget SliderWidget({
+  double value = 120,
+  double minValue = 80,
+  double maxValue = 220,
+  required void onChanged(double value),
+}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
@@ -144,13 +157,13 @@ Widget SliderWidget(
             fontSize: 30,
             fontWeight: FontWeight.bold,
           )),
-      heightText(value: '180', type: 'cm'),
+      heightText(value: '${value.round()}', type: 'cm'),
       Slider(
         value: value,
         max: maxValue,
         min: minValue,
         onChanged: (value) {
-          print(value.round());
+          onChanged(value);
         },
       )
     ],
