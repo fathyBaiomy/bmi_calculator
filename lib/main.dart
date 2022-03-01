@@ -97,27 +97,31 @@ Widget SliderWidget() {
             fontSize: 30,
             fontWeight: FontWeight.bold,
           )),
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.baseline,
-        // mainAxisSize: MainAxisSize.m,
-        mainAxisAlignment: MainAxisAlignment.center,
-        textBaseline: TextBaseline.alphabetic,
-        children: [
-          Text("180",
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.w900,
-              )),
-          SizedBox(
-            width: 5,
-          ),
-          Text("cm",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              )),
-        ],
+      heightText(value: '180', type: 'cm'),
+    ],
+  );
+}
+
+Widget heightText({required String value, required String type}) {
+  return Row(
+    crossAxisAlignment: CrossAxisAlignment.baseline,
+    // mainAxisSize: MainAxisSize.m,
+    mainAxisAlignment: MainAxisAlignment.center,
+    textBaseline: TextBaseline.alphabetic,
+    children: [
+      Text(value,
+          style: TextStyle(
+            fontSize: 40,
+            fontWeight: FontWeight.w900,
+          )),
+      SizedBox(
+        width: 5,
       ),
+      Text(type,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          )),
     ],
   );
 }
