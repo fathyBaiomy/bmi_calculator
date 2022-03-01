@@ -13,6 +13,11 @@ class BMIResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.keyboard_arrow_left)),
         title: Text(
           'results',
           style: TextStyle(
