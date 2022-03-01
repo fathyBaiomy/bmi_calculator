@@ -42,10 +42,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Container(
-                width: double.infinity,
-                color: Colors.red,
-              ),
+              child: BoxContainer(child: SliderWidget()),
             ),
             Expanded(
               child: Container(
@@ -93,11 +90,24 @@ Widget MaleFemaleWidget({required String text, required IconData icon}) {
   );
 }
 
-Widget BoxContainer({required Widget child, Color color = Colors.grey}) =>
-    Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: color,
-      ),
-      child: child,
-    );
+Widget SliderWidget() {
+  return Column(
+    children: [
+      Text("Height",
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          )),
+    ],
+  );
+}
+
+Widget BoxContainer({required Widget child, Color color = Colors.grey}) {
+  return Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      color: color,
+    ),
+    child: child,
+  );
+}
