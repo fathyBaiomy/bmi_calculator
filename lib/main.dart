@@ -65,13 +65,14 @@ class MyApp extends StatelessWidget {
               ),
             ),
             Container(
-              color: Colors.red,
+              color: Colors.blue,
               width: double.infinity,
               child: MaterialButton(
+                height: 60,
                 onPressed: () {},
                 child: Text(
                   'calculate',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
               ),
             )
