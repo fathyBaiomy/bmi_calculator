@@ -40,7 +40,10 @@ class MyApp extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: BoxContainer(child: SliderWidget()),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: BoxContainer(child: SliderWidget()),
+              ),
             ),
             Expanded(
               child: Container(
