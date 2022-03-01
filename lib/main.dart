@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,12 +22,23 @@ class MyApp extends StatelessWidget {
         body: Column(
           children: [
             Expanded(
-              child: Row(
-                children: [
-                  BoxContainer(
-                      child: MaleFemaleWidget(text: 'male', icon: Icons.male)),
-                  MaleFemaleWidget(text: 'female', icon: Icons.female),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: BoxContainer(
+                          child:
+                              MaleFemaleWidget(text: 'male', icon: Icons.male)),
+                    ),
+                    SizedBox(width: 20),
+                    Expanded(
+                      child: BoxContainer(
+                          child: MaleFemaleWidget(
+                              text: 'female', icon: Icons.female)),
+                    ),
+                  ],
+                ),
               ),
             ),
             Expanded(
@@ -80,6 +93,11 @@ Widget MaleFemaleWidget({required String text, required IconData icon}) {
   );
 }
 
-Widget BoxContainer({required Widget child}) => Container(
+Widget BoxContainer({required Widget child, Color color = Colors.grey}) =>
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: color,
+      ),
       child: child,
     );
