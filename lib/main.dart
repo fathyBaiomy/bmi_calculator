@@ -1,7 +1,8 @@
+import 'package:bmi_calculator_app/BMIResult.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(BMIResult());
 }
 
 class MyApp extends StatefulWidget {
