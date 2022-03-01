@@ -98,6 +98,14 @@ Widget SliderWidget() {
             fontWeight: FontWeight.bold,
           )),
       heightText(value: '180', type: 'cm'),
+      Slider(
+        value: 100,
+        max: 220,
+        min: 20,
+        onChanged: (value) {
+          print(value.round());
+        },
+      )
     ],
   );
 }
