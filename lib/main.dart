@@ -13,7 +13,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isMale = true;
-  double value = 100;
+  double value = 100, weight = 70, height = 180;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -89,13 +89,27 @@ class _MyAppState extends State<MyApp> {
                   children: [
                     Expanded(
                         child: BoxContainer(
-                            child: valueWidget(title: 'weight', value: '70'))),
+                            child: valueWidget(
+                                title: 'weight',
+                                value: weight,
+                                onChange: (value) {
+                                  setState(() {
+                                    weight = value;
+                                  });
+                                }))),
                     SizedBox(
                       width: 20,
                     ),
                     Expanded(
                         child: BoxContainer(
-                            child: valueWidget(title: 'height', value: '180'))),
+                            child: valueWidget(
+                                title: 'height',
+                                value: height,
+                                onChange: (value) {
+                                  setState(() {
+                                    height = value;
+                                  });
+                                }))),
                   ],
                 ),
               ),
@@ -170,7 +184,13 @@ Widget SliderWidget({
   );
 }
 
-Widget valueWidget({required String title, String value = "20"}) {
+Widget valueWidget({
+  required String title,
+  double value = 20,
+  double minValue = 0,
+  double maxValue = 180,
+  required void onChange(double value),
+}) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
@@ -180,7 +200,7 @@ Widget valueWidget({required String title, String value = "20"}) {
         style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
       ),
       Text(
-        value,
+        '${value.round()}',
         style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
       ),
       Row(
@@ -188,12 +208,18 @@ Widget valueWidget({required String title, String value = "20"}) {
         children: [
           FloatingActionButton(
             mini: true,
-            onPressed: () {},
+            onPressed: () {
+              if (value > minValue) value--;
+              onChange(value);
+            },
             child: Icon(Icons.remove),
           ),
           FloatingActionButton(
             mini: true,
-            onPressed: () {},
+            onPressed: () {
+              if (value < maxValue) ++value;
+              onChange(value);
+            },
             child: Icon(Icons.add),
           ),
         ],
