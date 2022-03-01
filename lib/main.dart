@@ -26,14 +26,18 @@ class MyApp extends StatelessWidget {
                   children: [
                     Expanded(
                       child: BoxContainer(
-                          child:
-                              MaleFemaleWidget(text: 'male', icon: Icons.male)),
+                          child: MaleFemaleWidget(
+                              text: 'male',
+                              path: "assets/images/male.png",
+                              color: Colors.black)),
                     ),
                     SizedBox(width: 20),
                     Expanded(
                       child: BoxContainer(
                           child: MaleFemaleWidget(
-                              text: 'female', icon: Icons.female)),
+                              text: 'female',
+                              path: "assets/images/female.png",
+                              color: Colors.black)),
                     ),
                   ],
                 ),
@@ -83,10 +87,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
-Widget MaleFemaleWidget({required String text, required IconData icon}) {
+Widget MaleFemaleWidget(
+    {required String text, required String path, Color color = Colors.black}) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
+      Image(
+        image: AssetImage(path),
+        width: 90,
+        color: color,
+      ),
+      SizedBox(
+        height: 15,
+      ),
       Text(
         text,
         style: TextStyle(
@@ -94,13 +107,6 @@ Widget MaleFemaleWidget({required String text, required IconData icon}) {
           fontWeight: FontWeight.bold,
         ),
       ),
-      SizedBox(
-        height: 15,
-      ),
-      Icon(
-        icon,
-        size: 70,
-      )
     ],
   );
 }
