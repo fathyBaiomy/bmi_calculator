@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
             Expanded(
               child: Row(
                 children: [
-                  MaleFemaleWidget(text: 'male', icon: Icons.male),
+                  BoxContainer(
+                      child: MaleFemaleWidget(text: 'male', icon: Icons.male)),
                   MaleFemaleWidget(text: 'female', icon: Icons.female),
                 ],
               ),
@@ -79,6 +80,6 @@ Widget MaleFemaleWidget({required String text, required IconData icon}) {
   );
 }
 
-Widget BoxContainer(Widget child) => Container(
+Widget BoxContainer({required Widget child}) => Container(
       child: child,
     );
